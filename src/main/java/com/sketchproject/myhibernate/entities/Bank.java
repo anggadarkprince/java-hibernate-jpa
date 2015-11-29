@@ -1,5 +1,6 @@
 package com.sketchproject.myhibernate.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "BANK")
-public class Bank {
+public class Bank implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +26,7 @@ public class Bank {
     private String name;
 
     @Embedded
-    private Address address = new Address();
+    private final Address address = new Address();
 
     @Column(name = "IS_INTERNATIONAL")
     private boolean international;

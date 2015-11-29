@@ -16,7 +16,13 @@ import javax.persistence.Column;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Transient;
+import javax.persistence.Embedded;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.Formula;
+
 
 /**
  *
@@ -39,18 +45,26 @@ public class User implements Serializable {
     @Column(name="LAST_NAME")
     private String lastName;
         
+    @Temporal(TemporalType.DATE)
     @Column(name="BIRTH_DATE", nullable=false)
     private Date birthDate;
         
     @Column(name="EMAIL_ADDRESS")
     private String emailAddress;
+    
+    @Embedded
+    @AttributeOverrides({@AttributeOverride(name="addressLine1", column=@Column(name="USER_ADDRESS_LINE_1")),
+        @AttributeOverride(name="addressLine2", column=@Column(name="USER_ADDRESS_LINE_2"))})
+    private Address address;
         
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="LAST_UPDATED_DATE")
-    private Date lastUpdateDate;
+    private Date lastUpdatedDate;
         
     @Column(name="LAST_UPDATED_BY")
-    private String lastUpdateBy;
+    private String lastUpdatedBy;
         
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="CREATED_DATE", updatable=false)
     private Date createdDate;
 
@@ -111,20 +125,28 @@ public class User implements Serializable {
         this.emailAddress = emailAddress;
     }
     
-    public Date getLastUpdateDate() {
-        return lastUpdateDate;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLastUpdateDate(Date lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
+    public void setAddress(Address address) {
+        this.address = address;
     }
     
-    public String getLastUpdateBy() {
-        return lastUpdateBy;
+    public Date getLastUpdatedDate() {
+        return lastUpdatedDate;
     }
 
-    public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+    public void setLastUpdatedDate(Date lastUpdateDate) {
+        this.lastUpdatedDate = lastUpdateDate;
+    }
+    
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    public void setLastUpdatedBy(String lastUpdateBy) {
+        this.lastUpdatedBy = lastUpdateBy;
     }
     
     public Date getCreatedDate() {

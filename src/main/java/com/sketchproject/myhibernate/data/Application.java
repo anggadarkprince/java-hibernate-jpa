@@ -35,8 +35,8 @@ public class Application {
         user.setEmailAddress("me@angga-ari.com");
         user.setFirstName("Angga");
         user.setLastName("Ari Wijaya");
-        user.setLastUpdateBy("Angga");
-        user.setLastUpdateDate(new Date());
+        user.setLastUpdatedBy("Angga");
+        user.setLastUpdatedDate(new Date());
         session.save(user);  
         
         // Bank
@@ -55,6 +55,28 @@ public class Application {
         //bank.getContacts().put("MANAGER", "Joe");
         //bank.getContacts().put("TELLER", "Mary");
         session.save(bank);
+        
+        // Adress
+        User user2 = new User();
+        Address address2 = new Address();
+        user2.setAge(22);
+        user2.setBirthDate(new Date());
+        user2.setCreatedBy("Kevin");
+        user2.setCreatedDate(new Date());
+        user2.setEmailAddress("kmb3");
+        user2.setFirstName("kevin");
+        user2.setLastName("bowersox");
+        user2.setLastUpdatedBy("kmb");
+        user2.setLastUpdatedDate(new Date());
+
+        address2.setAddressLine1("line 1");
+        address2.setAddressLine2("line2");
+        address2.setCity("Philadelphia");
+        address2.setState("PA");
+        address2.setZipCode("12345");
+
+        user.setAddress(address2);
+        session.save(user);
        
         
         // Update User                
