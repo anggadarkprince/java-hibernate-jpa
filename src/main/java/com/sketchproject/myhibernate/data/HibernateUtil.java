@@ -5,6 +5,7 @@
  */
 package com.sketchproject.myhibernate.data;
 
+import com.sketchproject.myhibernate.entities.Bank;
 import com.sketchproject.myhibernate.entities.TimeTest;
 import com.sketchproject.myhibernate.entities.User;
 import org.hibernate.SessionFactory;
@@ -24,6 +25,7 @@ public class HibernateUtil {
             Configuration configuration = new Configuration();
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(TimeTest.class);
+            configuration.addAnnotatedClass(Bank.class);
             return configuration.buildSessionFactory(new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties())
                     .build());

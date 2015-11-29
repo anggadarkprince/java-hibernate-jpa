@@ -5,6 +5,8 @@
  */
 package com.sketchproject.myhibernate.data;
 
+import com.sketchproject.myhibernate.entities.Address;
+import com.sketchproject.myhibernate.entities.Bank;
 import com.sketchproject.myhibernate.entities.TimeTest;
 import com.sketchproject.myhibernate.entities.User;
 import java.util.Calendar;
@@ -25,7 +27,8 @@ public class Application {
         session.getTransaction().begin();
         //session.beginTransaction();
         
-        User user = new User();
+        // User
+        User user = new User();        
         user.setBirthDate(getMyBirthday());
         user.setCreatedBy("Admin");
         user.setCreatedDate(new Date());
@@ -34,20 +37,42 @@ public class Application {
         user.setLastName("Ari Wijaya");
         user.setLastUpdateBy("Angga");
         user.setLastUpdateDate(new Date());
-       
         session.save(user);  
-                        
+        
+        // Bank
+        Bank bank = new Bank();
+        bank.setName("Federal Trust");
+        bank.setAddressLine1("33 Wall Street");
+        bank.setAddressLine2("Suite 233");
+        bank.setCity("New York");
+        bank.setState("NY");
+        bank.setZipCode("12345");
+        bank.setInternational(false);
+        bank.setCreatedBy("Kevin");
+        bank.setCreatedDate(new Date());
+        bank.setLastUpdatedBy("Kevin");
+        bank.setLastUpdatedDate(new Date());
+        //bank.getContacts().put("MANAGER", "Joe");
+        //bank.getContacts().put("TELLER", "Mary");
+        session.save(bank);
+       
+        
+        // Update User                
         User dbUser = (User) session.get(User.class, user.getUserId());
         dbUser.setFirstName("Diaz");
         session.update(dbUser);
         
+        // Time check
         TimeTest test = new TimeTest(new Date());
         session.save(test);
         
         session.getTransaction().commit();
+        
+        // Refresh time
         session.refresh(test);
         System.out.println(test.toString());
         
+        // refresh user
         session.refresh(user);
         System.out.println(user.getAge());
         
