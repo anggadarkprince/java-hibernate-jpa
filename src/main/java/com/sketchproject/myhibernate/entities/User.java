@@ -6,7 +6,9 @@
 package com.sketchproject.myhibernate.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -21,6 +23,9 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.JoinColumn;
 import org.hibernate.annotations.Formula;
 
 
@@ -52,10 +57,13 @@ public class User implements Serializable {
     @Column(name="EMAIL_ADDRESS")
     private String emailAddress;
     
-    @Embedded
+    //@Embedded
+    @ElementCollection
+    @CollectionTable(name="USER_ADDRESS", joinColumns=@JoinColumn(name="USER_ID"))
     @AttributeOverrides({@AttributeOverride(name="addressLine1", column=@Column(name="USER_ADDRESS_LINE_1")),
         @AttributeOverride(name="addressLine2", column=@Column(name="USER_ADDRESS_LINE_2"))})
-    private Address address;
+    //private Address address;
+    private List<Address> address = new ArrayList<>();
         
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="LAST_UPDATED_DATE")
@@ -125,11 +133,11 @@ public class User implements Serializable {
         this.emailAddress = emailAddress;
     }
     
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
     

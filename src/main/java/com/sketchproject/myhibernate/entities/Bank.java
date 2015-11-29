@@ -1,7 +1,12 @@
 package com.sketchproject.myhibernate.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,6 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 
 @Entity
 @Table(name = "BANK")
@@ -44,7 +53,14 @@ public class Bank implements Serializable {
 
     @Column(name = "CREATED_BY")
     private String createdBy;
-
+    
+    @ElementCollection
+    @CollectionTable(name="BANK_CONTACT", joinColumns=@JoinColumn(name="BANK_ID"))
+    @MapKeyColumn(name="POSITION_TYPE")
+    @Column(name="NAME")
+    //private List<String> contacts = new ArrayList<>();
+    private Map<String, String> contacts = new HashMap<>();
+   
     public Long getBankId() {
         return bankId;
     }
@@ -139,6 +155,14 @@ public class Bank implements Serializable {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+    
+    public Map<String, String> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Map<String, String> contacts) {
+        this.contacts = contacts;
     }
 
 }

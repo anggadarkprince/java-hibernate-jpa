@@ -52,12 +52,14 @@ public class Application {
         bank.setCreatedDate(new Date());
         bank.setLastUpdatedBy("Kevin");
         bank.setLastUpdatedDate(new Date());
-        //bank.getContacts().put("MANAGER", "Joe");
-        //bank.getContacts().put("TELLER", "Mary");
+        //bank.getContacts().add("Manager");
+        bank.getContacts().put("Manager", "Joe");
+        bank.getContacts().put("Teller", "Mary");
         session.save(bank);
         
         // Adress
         User user2 = new User();
+        Address address1 = new Address();
         Address address2 = new Address();
         user2.setAge(22);
         user2.setBirthDate(new Date());
@@ -69,13 +71,21 @@ public class Application {
         user2.setLastUpdatedBy("kmb");
         user2.setLastUpdatedDate(new Date());
 
-        address2.setAddressLine1("line 1");
-        address2.setAddressLine2("line2");
-        address2.setCity("Philadelphia");
-        address2.setState("PA");
-        address2.setZipCode("12345");
+        address1.setAddressLine1("line 1");
+        address1.setAddressLine2("line2");
+        address1.setCity("Philadelphia");
+        address1.setState("PA");
+        address1.setZipCode("12345");
+        
+        address2.setAddressLine1("Avenue 34");
+        address2.setAddressLine2("Brighman 25");
+        address2.setCity("New York");
+        address2.setState("NY");
+        address2.setZipCode("54321");
 
-        user.setAddress(address2);
+        //user.setAddress(address1);
+        user.getAddress().add(address1);
+        user.getAddress().add(address2);
         session.save(user);
        
         
