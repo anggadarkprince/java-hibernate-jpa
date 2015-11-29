@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -27,7 +28,7 @@ import javax.persistence.AccessType;
 public class User implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY) // @GeneratedValue <- auto strategy
     @Column(name="USER_ID")
     private Long userId;
     
@@ -54,7 +55,17 @@ public class User implements Serializable {
 
     @Column(name="CREATED_BY", updatable=false)
     private String createdBy;
-
+    
+    @Transient
+    private boolean valid;
+    
+    public boolean isValid(){
+        return valid;
+    }
+    
+    public void setValid(boolean valid){
+        this.valid = valid;
+    }           
     
     public Long getUserId() {
         return userId;

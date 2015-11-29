@@ -34,7 +34,6 @@ public class Application {
         user.setLastUpdateDate(new Date());
        
         session.save(user);        
-        //session.getTransaction().commit();
         
         User dbUser = (User) session.get(User.class, user.getUserId());
         dbUser.setFirstName("Diaz");
