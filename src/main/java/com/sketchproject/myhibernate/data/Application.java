@@ -5,6 +5,7 @@
  */
 package com.sketchproject.myhibernate.data;
 
+import com.sketchproject.myhibernate.entities.TimeTest;
 import com.sketchproject.myhibernate.entities.User;
 import java.util.Date;
 import org.hibernate.Session;
@@ -39,7 +40,13 @@ public class Application {
         dbUser.setFirstName("Diaz");
         session.update(dbUser);
         
+        TimeTest test = new TimeTest(new Date());
+        session.save(test);
+        
         session.getTransaction().commit();
+        session.refresh(test);
+        System.out.println(test.toString());
+        
         session.close();
     }
     
