@@ -7,6 +7,7 @@ package com.sketchproject.myhibernate.data;
 
 import com.sketchproject.myhibernate.entities.TimeTest;
 import com.sketchproject.myhibernate.entities.User;
+import java.util.Calendar;
 import java.util.Date;
 import org.hibernate.Session;
 
@@ -25,7 +26,7 @@ public class Application {
         //session.beginTransaction();
         
         User user = new User();
-        user.setBirthDate(new Date());
+        user.setBirthDate(getMyBirthday());
         user.setCreatedBy("Admin");
         user.setCreatedDate(new Date());
         user.setEmailAddress("me@angga-ari.com");
@@ -34,8 +35,8 @@ public class Application {
         user.setLastUpdateBy("Angga");
         user.setLastUpdateDate(new Date());
        
-        session.save(user);        
-        
+        session.save(user);  
+                        
         User dbUser = (User) session.get(User.class, user.getUserId());
         dbUser.setFirstName("Diaz");
         session.update(dbUser);
@@ -47,7 +48,18 @@ public class Application {
         session.refresh(test);
         System.out.println(test.toString());
         
+        session.refresh(user);
+        System.out.println(user.getAge());
+        
         session.close();
+    }
+    
+    private static Date getMyBirthday(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 1992);
+        calendar.set(Calendar.MONTH, 5);
+        calendar.set(Calendar.DATE, 26);
+        return calendar.getTime();
     }
     
 }

@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Transient;
+import org.hibernate.annotations.Formula;
 
 /**
  *
@@ -58,6 +59,9 @@ public class User implements Serializable {
     
     @Transient
     private boolean valid;
+    
+    @Formula("lower(datediff(curdate(), birth_date)/365)")
+    private int age;
     
     public boolean isValid(){
         return valid;
@@ -137,5 +141,13 @@ public class User implements Serializable {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
