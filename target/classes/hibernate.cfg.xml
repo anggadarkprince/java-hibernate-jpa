@@ -20,6 +20,12 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.sketchproject.myhibernate.entities.User"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Bank"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Account"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Credential"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Budget"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Transaction"/>
+        <mapping class="com.sketchproject.myhibernate.entities.TimeTest"/>
 
     </session-factory>
 

@@ -1,5 +1,6 @@
 package com.sketchproject.myhibernate.data;
 
+import com.sketchproject.myhibernate.entities.Transaction;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,7 +11,6 @@ import com.sketchproject.myhibernate.entities.Account;
 import com.sketchproject.myhibernate.entities.Address;
 import com.sketchproject.myhibernate.entities.Bank;
 import com.sketchproject.myhibernate.entities.Credential;
-import com.sketchproject.myhibernate.entities.Transaction;
 import com.sketchproject.myhibernate.entities.User;
 
 public class Saving {

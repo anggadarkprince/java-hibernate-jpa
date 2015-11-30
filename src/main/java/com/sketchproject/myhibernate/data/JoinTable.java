@@ -2,12 +2,13 @@ package com.sketchproject.myhibernate.data;
 
 import com.sketchproject.myhibernate.entities.Transaction;
 import com.sketchproject.myhibernate.entities.Account;
+import com.sketchproject.myhibernate.entities.Budget;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.hibernate.Session;
 
-public class Application2 {
+public class JoinTable {
 
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -16,14 +17,17 @@ public class Application2 {
             org.hibernate.Transaction transaction = session.beginTransaction();
 
             Account account = createNewAccount();
-            account.getTransactions().add(createNewBeltPurchase(account));
-            account.getTransactions().add(createShoePurchase(account));
-            session.save(account);
 
+            Budget budget = new Budget();
+            budget.setGoalAmount(new BigDecimal("10000.00"));
+            budget.setName("Emergency Fund");
+            budget.setPeriod("Yearly");
+
+            budget.getTransactions().add(createNewBeltPurchase(account));
+            budget.getTransactions().add(createShoePurchase(account));
+
+            session.save(budget);
             transaction.commit();
-
-            Transaction dbTransaction = (Transaction) session.get(Transaction.class, account.getTransactions().get(0).getTransactionId());
-            System.out.println(dbTransaction.getAccount().getName());
 
         } catch (Exception e) {
             e.printStackTrace();

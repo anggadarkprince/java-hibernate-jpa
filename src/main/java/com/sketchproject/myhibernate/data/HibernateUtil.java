@@ -27,6 +27,9 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory(){
         try{
             Configuration configuration = new Configuration();
+            configuration.configure();
+            
+            /*
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(TimeTest.class);
             configuration.addAnnotatedClass(Bank.class);
@@ -34,6 +37,7 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(Account.class);
             configuration.addAnnotatedClass(Transaction.class);
             configuration.addAnnotatedClass(Budget.class);
+            */
             
             return configuration.buildSessionFactory(new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties())

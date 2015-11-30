@@ -1,6 +1,7 @@
 package com.sketchproject.myhibernate.entities;
 
 import com.sketchproject.myhibernate.entities.Account;
+import com.sketchproject.myhibernate.entities.Account;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
