@@ -27,6 +27,7 @@
         <mapping class="com.sketchproject.myhibernate.entities.Transaction"/>
         <mapping class="com.sketchproject.myhibernate.entities.TimeTest"/>
         <mapping class="com.sketchproject.myhibernate.entities.Currency"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Market"/>
 
     </session-factory>
 

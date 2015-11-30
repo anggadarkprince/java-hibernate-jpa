@@ -11,14 +11,17 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -29,11 +32,18 @@ public class Account implements Serializable {
     @Column(name = "ACCOUNT_ID")
     private Long accountId;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="USER_ACCOUNT", joinColumns=@JoinColumn(name="ACCOUNT_ID"),
-            inverseJoinColumns=@JoinColumn(name="USER_ID"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ACCOUNT", joinColumns = @JoinColumn(name = "ACCOUNT_ID"), inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     private Set<User> users = new HashSet<>();
-    
+
+    @ManyToOne
+    @JoinColumn(name = "BANK_ID")
+    private Bank bank;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ACCOUNT_TYPE")
+    private AccountType accountType;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     List<Transaction> transactions = new ArrayList<>();
 
@@ -158,6 +168,14 @@ public class Account implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public final AccountType getAccountType() {
+        return accountType;
+    }
+
+    public final void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
 }
