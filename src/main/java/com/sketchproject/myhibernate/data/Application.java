@@ -100,8 +100,8 @@ public class Application {
             address2.setZipCode("54321");
 
             //user.setAddress(address1);
-            user.getAddress().add(address1);
-            user.getAddress().add(address2);
+            user.getAddresses().add(address1);
+            user.getAddresses().add(address2);
             session.save(user);
 
             // Update User                
