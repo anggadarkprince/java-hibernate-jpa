@@ -13,7 +13,7 @@ import com.sketchproject.myhibernate.entities.Credential;
 import com.sketchproject.myhibernate.entities.Transaction;
 import com.sketchproject.myhibernate.entities.User;
 
-public class Retreiving {
+public class Modifiying {
 
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -21,11 +21,12 @@ public class Retreiving {
         try {
             org.hibernate.Transaction transaction = session.beginTransaction();
 
-            //Bank bank = (Bank) session.get(Bank.class, 1L);
-            Bank bank = (Bank) session.load(Bank.class, 1L);
-            System.out.println("Method Executed");
+            Bank bank = (Bank) session.get(Bank.class, 1L);
 
-            System.out.println(bank.getName());
+            bank.setName("New Hope Bank");
+            bank.setLastUpdatedBy("Kevin Bowersox");
+            bank.setLastUpdatedDate(new Date());
+
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
