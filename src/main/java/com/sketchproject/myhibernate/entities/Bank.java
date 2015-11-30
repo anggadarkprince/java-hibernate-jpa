@@ -53,14 +53,14 @@ public class Bank implements Serializable {
 
     @Column(name = "CREATED_BY")
     private String createdBy;
-    
+
     @ElementCollection
-    @CollectionTable(name="BANK_CONTACT", joinColumns=@JoinColumn(name="BANK_ID"))
-    @MapKeyColumn(name="POSITION_TYPE")
-    @Column(name="NAME")
+    @CollectionTable(name = "BANK_CONTACT", joinColumns = @JoinColumn(name = "BANK_ID"))
+    @MapKeyColumn(name = "POSITION_TYPE")
+    @Column(name = "NAME")
     //private List<String> contacts = new ArrayList<>();
     private Map<String, String> contacts = new HashMap<>();
-   
+
     public Long getBankId() {
         return bankId;
     }
@@ -117,6 +117,14 @@ public class Bank implements Serializable {
         this.address.setZipCode(zipCode);
     }
 
+    public String getAddressType() {
+        return address.getAddressType();
+    }
+
+    public void setAddressType(String addressType) {
+        this.address.setAddressType(addressType);
+    }
+
     public boolean isInternational() {
         return international;
     }
@@ -156,7 +164,7 @@ public class Bank implements Serializable {
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
-    
+
     public Map<String, String> getContacts() {
         return contacts;
     }
