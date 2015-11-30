@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "TRANSACTION")
@@ -23,7 +24,7 @@ public class Transaction implements Serializable {
     @Column(name = "TRANSACTION_ID")
     private Long transactionId;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
