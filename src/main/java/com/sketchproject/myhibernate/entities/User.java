@@ -26,6 +26,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.Formula;
 
 
@@ -43,6 +44,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY) // @GeneratedValue <- auto strategy
     @Column(name="USER_ID")
     private Long userId;
+    
+    @OneToOne(mappedBy="user")
+    private Credential credential;
     
     @Column(name="FIRST_NAME")
     private String firstName;
@@ -179,5 +183,13 @@ public class User implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
 }

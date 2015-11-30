@@ -7,6 +7,7 @@ package com.sketchproject.myhibernate.data;
 
 import com.sketchproject.myhibernate.entities.Address;
 import com.sketchproject.myhibernate.entities.Bank;
+import com.sketchproject.myhibernate.entities.Credential;
 import com.sketchproject.myhibernate.entities.TimeTest;
 import com.sketchproject.myhibernate.entities.User;
 import java.util.Calendar;
@@ -28,17 +29,18 @@ public class Application {
         //session.beginTransaction();
         
         // User
-        User user = new User();        
-        user.setBirthDate(getMyBirthday());
-        user.setCreatedBy("Admin");
-        user.setCreatedDate(new Date());
-        user.setEmailAddress("me@angga-ari.com");
-        user.setFirstName("Angga");
-        user.setLastName("Ari Wijaya");
-        user.setLastUpdatedBy("Angga");
-        user.setLastUpdatedDate(new Date());
-        session.save(user);  
+        User user = saveUser(session);
         
+        Credential credential = new Credential();
+        credential.setPassword("anggapassword");
+        credential.setUsername("anggadarkprince");
+        credential.setUser(user);
+        user.setCredential(credential);
+        
+        session.save(credential);
+        
+        User credentialUser = (User) session.get(User.class, credential.getUser().getUserId());
+        System.out.println(credentialUser.getFirstName());
         // Bank
         Bank bank = new Bank();
         bank.setName("Federal Trust");
@@ -87,8 +89,7 @@ public class Application {
         user.getAddress().add(address1);
         user.getAddress().add(address2);
         session.save(user);
-       
-        
+               
         // Update User                
         User dbUser = (User) session.get(User.class, user.getUserId());
         dbUser.setFirstName("Diaz");
@@ -117,6 +118,20 @@ public class Application {
         calendar.set(Calendar.MONTH, 5);
         calendar.set(Calendar.DATE, 26);
         return calendar.getTime();
+    }
+    
+    private static User saveUser(Session session){
+        User user = new User();        
+        user.setBirthDate(getMyBirthday());
+        user.setCreatedBy("Admin");
+        user.setCreatedDate(new Date());
+        user.setEmailAddress("me@angga-ari.com");
+        user.setFirstName("Angga");
+        user.setLastName("Ari Wijaya");
+        user.setLastUpdatedBy("Angga");
+        user.setLastUpdatedDate(new Date());
+        session.save(user);  
+        return user;
     }
     
 }
