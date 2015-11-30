@@ -28,6 +28,10 @@
         <mapping class="com.sketchproject.myhibernate.entities.TimeTest"/>
         <mapping class="com.sketchproject.myhibernate.entities.Currency"/>
         <mapping class="com.sketchproject.myhibernate.entities.Market"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Bond"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Stock"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Investment"/>
+        <mapping class="com.sketchproject.myhibernate.entities.Portfolio"/>
 
     </session-factory>
 
