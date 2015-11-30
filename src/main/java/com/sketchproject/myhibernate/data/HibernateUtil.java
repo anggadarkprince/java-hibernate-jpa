@@ -5,6 +5,8 @@
  */
 package com.sketchproject.myhibernate.data;
 
+import com.sketchproject.myhibernate.entities.Transaction;
+import com.sketchproject.myhibernate.entities.Account;
 import com.sketchproject.myhibernate.entities.Bank;
 import com.sketchproject.myhibernate.entities.Credential;
 import com.sketchproject.myhibernate.entities.TimeTest;
@@ -28,6 +30,8 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(TimeTest.class);
             configuration.addAnnotatedClass(Bank.class);
             configuration.addAnnotatedClass(Credential.class);
+            configuration.addAnnotatedClass(Account.class);
+            configuration.addAnnotatedClass(Transaction.class);
             
             return configuration.buildSessionFactory(new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties())
