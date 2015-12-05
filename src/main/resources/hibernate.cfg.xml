@@ -32,6 +32,7 @@
         <mapping class="com.sketchproject.myhibernate.entities.Stock"/>
         <mapping class="com.sketchproject.myhibernate.entities.Investment"/>
         <mapping class="com.sketchproject.myhibernate.entities.Portfolio"/>
+        <mapping class="com.sketchproject.myhibernate.entities.UserCredentialView"/>
 
     </session-factory>
 
