@@ -6,6 +6,11 @@
 <hibernate-configuration>
 
     <session-factory>
+        
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <!-- <property name="hibernate.hbm2ddl.auto">validate</property> -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+        <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
